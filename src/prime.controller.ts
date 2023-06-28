@@ -9,16 +9,13 @@ export class PrimeController {
     ) {
     }
 
-    @Get()
+    @Get('hello')
     hello() {
         return "Hello"
     }
 
     @Get()
     async generatePrimes(@Query('n') n = 10000000) {
-        const primeNumbers = await this.workerPool.run(n);
-
-        return primeNumbers
+        return await this.workerPool.run(n);
     }
 }
-// curl -X GET -w "\nTime total: %{time_total}s\n" "localhost:3000/prime/?n=10000000"
